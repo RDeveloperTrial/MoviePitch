@@ -8,7 +8,7 @@ const configuration = new Configuration({
 })
 
 const openai = new OpenAIApi(configuration)
-const imageDescription = 'Grey poodle playing happily with a pomeranian';
+const imageDescription = 'Natural background in a Van Gogh style';
 
 document.getElementById("send-btn").addEventListener("click", () => {
   const setupTextarea = document.getElementById('setup-textarea')
@@ -137,13 +137,17 @@ async function fetchImageUrl(imagePrompt) {
 }
 
 async function justImage() {
-  const response = await openai.createImage({
-    prompt: imageDescription,
-    n: 1,
-    size: '512x512',
-    response_format: 'url'
-  })
-  document.getElementById('output-img-container').innerHTML = `<img src="${response.data.data[0].url}">`
+    const url = 'https://curious-bienenstitch-c54839.netlify.app/.netlify/functions/fetchAI'
+    
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'content-type': 'text/plain',
+        },
+        body: imageDescription
+    })
+    const data = await response.json()
+  document.getElementById('output-img-container').innerHTML = `<img src="${data.reply.data[0].url}">`
   setupInputContainer.innerHTML = `<button id="view-pitch-btn" class="view-pitch-btn">View Pitch</button>`
   document.getElementById('view-pitch-btn').addEventListener('click', () => {
     document.getElementById('setup-container').style.display = 'none'
