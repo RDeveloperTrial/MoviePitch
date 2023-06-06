@@ -33,7 +33,7 @@ async function fetchBotReply(outline) {
     body: outline
   })
 
-  movieBossText.innerText = response.reply.choices[0].text.trim()
+  movieBossText.innerText = response.reply.data.choices[0].text.trim()
   console.log(response)
 }
 
@@ -48,7 +48,7 @@ async function fetchSynopsis(outline) {
     },
     body: outline
   })
-  const synopsis = response.reply.choices[0].text.trim()
+  const synopsis = response.reply.data.choices[0].text.trim()
   document.getElementById('output-text').innerText = synopsis
   fetchTitle(synopsis)
   //fetchStars(synopsis)
@@ -65,7 +65,7 @@ async function fetchTitle(synopsis) {
     },
     body: synopsis
   })
-  const title = response.reply.choices[0].text.trim()
+  const title = response.reply.data.choices[0].text.trim()
   document.getElementById('output-title').innerText = title
   //fetchImagePrompt(title, synopsis) Uncomment for image generation
 }
