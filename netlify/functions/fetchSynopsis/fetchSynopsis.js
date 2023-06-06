@@ -1,4 +1,11 @@
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
+import { Configuration, OpenAIApi } from 'openai'
+
+const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+})
+
+const openai = new OpenAIApi(configuration)
+
 const handler = async (event) => {
   try {
     const response = await openai.createCompletion({
