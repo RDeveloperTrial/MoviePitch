@@ -57,7 +57,7 @@ async function fetchSynopsis(outline) {
 }
 
 async function fetchTitle(synopsis) {
-  const url = 'https://curious-bienenstitch-c54839.netlify.app/.netlify/functions/fetchSynopsis'
+  const url = 'https://curious-bienenstitch-c54839.netlify.app/.netlify/functions/fetchTitle'
 
   const response = await fetch(url, {
     method: 'POST',
