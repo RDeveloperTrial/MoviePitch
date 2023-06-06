@@ -69,8 +69,10 @@ async function fetchTitle(synopsis) {
   const data = await response.json()
   const title = data.reply.choices[0].text.trim()
   document.getElementById('output-title').innerText = title
-  //fetchImagePrompt(title, synopsis) Uncomment for image generation and comment next line
+  //fetchImagePrompt(title, synopsis) Uncomment for image generation and comment next three lines
+  document.getElementById('setup-container').style.display = 'none'
   document.getElementById('output-container').style.display = 'flex'
+  movieBossText.innerText = `This idea is so good I'm jealous! It's gonna make you rich for sure! Remember, I want 10% 💰`
 
 }
 
