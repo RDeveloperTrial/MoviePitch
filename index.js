@@ -32,8 +32,8 @@ async function fetchBotReply(outline) {
     },
     body: outline
   })
-
-  movieBossText.innerText = response.reply.data.choices[0].text.trim()
+  const data = await response.json()
+  movieBossText.innerText = data.reply.choices[0].text.trim()
   console.log(response)
 }
 
@@ -48,15 +48,16 @@ async function fetchSynopsis(outline) {
     },
     body: outline
   })
-  const synopsis = response.reply.data.choices[0].text.trim()
+  const data = await response.json()
+  const synopsis = data.reply.choices[0].text.trim()
   document.getElementById('output-text').innerText = synopsis
   fetchTitle(synopsis)
-  //fetchStars(synopsis)
+  fetchStars(synopsis)
 
 }
 
 async function fetchTitle(synopsis) {
-  const url = 'https://curious-bienenstitch-c54839.netlify.app/.netlify/functions/fetchTitle'
+  const url = 'https://curious-bienenstitch-c54839.netlify.app/.netlify/functions/fetchSynopsis'
 
   const response = await fetch(url, {
     method: 'POST',
@@ -65,7 +66,8 @@ async function fetchTitle(synopsis) {
     },
     body: synopsis
   })
-  const title = response.reply.data.choices[0].text.trim()
+  const data = await response.json()
+  const title = data.reply.choices[0].text.trim()
   document.getElementById('output-title').innerText = title
   //fetchImagePrompt(title, synopsis) Uncomment for image generation
 }
