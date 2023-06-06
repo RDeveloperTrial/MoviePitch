@@ -69,7 +69,9 @@ async function fetchTitle(synopsis) {
   const data = await response.json()
   const title = data.reply.choices[0].text.trim()
   document.getElementById('output-title').innerText = title
-  //fetchImagePrompt(title, synopsis) Uncomment for image generation
+  //fetchImagePrompt(title, synopsis) Uncomment for image generation and comment next line
+  document.getElementById('output-container').style.display = 'flex'
+
 }
 
 async function fetchStars(synopsis) {
