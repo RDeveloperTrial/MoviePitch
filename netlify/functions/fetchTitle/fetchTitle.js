@@ -7,6 +7,18 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 const handler = async (event) => {
+  // Handle OPTIONS request
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      },
+      body: 'OK',
+    }
+  }
     try {
       const response = await openai.createCompletion({
         model: 'text-davinci-003',
